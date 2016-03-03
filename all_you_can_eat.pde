@@ -21,7 +21,7 @@ CountDownToApocalypse countDown;
 SoundSystem SOUND;
 
 
-Lava collider;
+Collider collider;
 
 int startTime;
 
@@ -73,7 +73,7 @@ void setup() {
   backgroundSprite = loadImage("asset/graphics/background_1280x960.png"); 
 
   // collider (eat attack)
-  collider = new Lava(0, 0, 0, 0, 0.1);
+  collider = new Collider(0, 0, 0, 0);
   
   // IMAGES
   
@@ -182,32 +182,22 @@ void draw() {
   
   // update collider with beast position x y w h
   int biteOffset = 100;
-  collider.x = beast.location.x - biteOffset;
+  float mouthX = beast.location.x + 128 - biteOffset;
   if (!beast.facingLeft) {
-    collider.x += 2 * biteOffset; 
-  }
-  collider.y = beast.location.y;
-  collider.w = 200;
-  collider.h = 200;
+    mouthX += 2 * biteOffset; 
+  } 
+  
+  Collider attack = new Collider(mouthX, beast.location.y - 100, 200,200);
 
   for (Mover mover : spawned) {
     if (mover.active) {
-      /*
-      if (lava.contains(mover)) {
-        if (mover.isFalling) {
-          // Calculate drag force
-          PVector drag = lava.drag(mover);
-          // Apply drag force to Mover
-          mover.applyForce(drag);
-        }
-      }
-      */
       
-      if ("beast_munch_left" == beast.animState
-          || "beast_munch_right" == beast.animState) {
-            
-        if (collider.contains(mover)) {
-          onEat(mover);
+      boolean beastAttacks = "beast_munch_left" == beast.animState
+                            || "beast_munch_right" == beast.animState;
+      if (!mover.isPlayer && beastAttacks) {
+        if (attack.contains(mover)) {
+          
+          onEat();
           mover.setDead();
         }
       }
@@ -218,6 +208,7 @@ void draw() {
       }
       
       mover.update();
+      // draw player last so he is seen in front of other sprites
       if (!mover.isPlayer) {
         mover.display();
       }
@@ -242,7 +233,7 @@ void draw() {
   updateApocalypse();
 }
 
-void onEat(Mover mover) {
+void onEat() {
   println("onEat");
   SOUND.playSE("asset/audio/se/eat.mp3");
   addSpawn(2);

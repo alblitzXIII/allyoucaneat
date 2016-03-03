@@ -93,12 +93,11 @@ class Mover {
   
   // Draw Mover
   void display() {
-    stroke(255);
-    strokeWeight(2);
-    fill(255, 200);
     
-    //ellipse(location.x, location.y, 16, 16);
     if (!isAnimated && null == img) {
+      stroke(255);
+      strokeWeight(2);
+      fill(255, 200);
       ellipse(location.x, location.y, 16, 16);
     }
     else {
@@ -116,7 +115,7 @@ class Mover {
         //println("f=" + whichFrame);
         img = thisSheet[whichFrame];
       }
-      image(img, location.x - 32, location.y - 32);
+      image(img, location.x - 128, location.y - 128);
       if (type=="meteor") {
         println("display meteor");
         sps.display();

@@ -11,8 +11,8 @@ public class SmokeParticleSystem extends PApplet{
 
   public SmokeParticleSystem(int n) {
     particles = new ArrayList<SmokeParticle>();
-    particleShape = createShape(PShape.GROUP);
-
+    particleShape = new PShape(PShape.GROUP);
+    
     for (int i = 0; i < n; i++) {
       int col = floor(random(0,2));
       SmokeParticle p = new SmokeParticle(col);

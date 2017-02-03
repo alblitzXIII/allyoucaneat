@@ -45,7 +45,7 @@ class SmokeParticle extends PApplet {
 	  if(smokeParticleSprites == null){
 		  smokeParticleSprites = new PImage[4];
 		  for(int i=0; i<4;i++){
-		    smokeParticleSprites[i] = loadImage("smoke_particle_"+i+".png");
+		    smokeParticleSprites[i] = loadImage("assets/graphics/smoke_particle_"+i+".png");
 		  }
 	  }
   }

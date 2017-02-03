@@ -1,10 +1,11 @@
+package psim;
 import FX.SmokeParticleSystem;
 import FX.ExplosionParticleSystem;
 import FX.ExplosionSystem;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class AllYouCanEat extends PApplet {
+public class ParticleSimulator extends PApplet {
 
 	// subsystems 
 	static SoundSystem SOUND;
@@ -20,7 +21,7 @@ public class AllYouCanEat extends PApplet {
 
 
 	public static void main(String[] args) {
-		PApplet.main("AllYouCanEat");
+		PApplet.main("ParticleSimulator");
 	}
 	
 	public void loadSubSystems(){

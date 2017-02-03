@@ -1,3 +1,4 @@
+package psim;
 public class Constants {
 	static int purple = 0x490a34;
 	static int pink = 0xbd1550;

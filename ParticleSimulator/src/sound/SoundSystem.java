@@ -1,9 +1,10 @@
-package psim;
+package sound;
+
 import java.util.ArrayList;
 
 import ddf.minim.*;
 
-class SoundSystem{
+public class SoundSystem{
   
   private Minim mMinim;
 

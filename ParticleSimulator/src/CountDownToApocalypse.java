@@ -1,6 +1,3 @@
-package psim;
-
-
 import processing.core.PApplet;
 
 public class CountDownToApocalypse extends PApplet{

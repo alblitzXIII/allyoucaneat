@@ -3,6 +3,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
+import components.ResourceManager;
 
 class SmokeParticle extends PApplet {
 
@@ -12,20 +13,18 @@ class SmokeParticle extends PApplet {
   float partSize;
   PVector gravity = new PVector(0,-0.1f);
   
-  static PImage[] smokeParticleSprites;
-  static PImage[] explosionParticles;
-
-  SmokeParticle(int col) {
-	  
-	initParticleSprites(); // runs only once  
-	  
+  SmokeParticle(ResourceManager rm, int col) {
+	if(!rm.isLoaded()){
+		System.out.println("Resource Manager has to be loaded first!!");
+		System.exit(1);
+	}
     if(!(col>=0 && col<4)){
       col=0;
-      System.out.println("Error: particle color doesn't exist");
+      System.out.println("Error: particle color doesn't exist, using 0 instead.");
     }
-    PImage sprite = smokeParticleSprites[col];
+    PImage sprite = rm.smokeParticleSprites[col];
     partSize = random(10,60);
-    part = createShape();
+    part = new PShape();
     part.beginShape(QUAD);
     part.noStroke();
     part.texture(sprite);
@@ -39,15 +38,6 @@ class SmokeParticle extends PApplet {
     rebirth(-20,-20);
 
     lifespan = random(255);
-  }
-  
-  void initParticleSprites(){
-	  if(smokeParticleSprites == null){
-		  smokeParticleSprites = new PImage[4];
-		  for(int i=0; i<4;i++){
-		    smokeParticleSprites[i] = loadImage("assets/graphics/smoke_particle_"+i+".png");
-		  }
-	  }
   }
 
   PShape getShape() {
